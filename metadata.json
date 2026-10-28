@@ -1,0 +1,8 @@
+{
+  "name": "Remix سواعد - تطبيق رياضي",
+  "description": "تطبيق ويب رياضي للموبايل لدفعة سواعد: بطولات كرة القدم، الطائرة، الشطرنج، البلياردو والبلايستيشن مع جداول إقصائية وترتيب تفاعلي.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

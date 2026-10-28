@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>سواعد - تطبيق رياضي</title>
+  <meta name="description" content="تطبيق ويب رياضي للموبايل لدفعة سواعد: بطولات كرة القدم، الطائرة، الشطرنج، البلياردو والبلايستيشن مع جداول إقصائية وترتيب تفاعلي." />
+  <meta property="og:title" content="سواعد - تطبيق رياضي" />
+  <meta property="og:description" content="معاً نصنع الأفضل .. داخل وخارج الملعب. متابعة بطولات ومباريات سواعد لحظة بلحظة." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <!-- إطار التطبيق للموبايل سواعد -->
+  <div class="app-container" id="app">
+
+    <!-- 1. الهيدر الرئيسي (Main Header) -->
+    <header class="main-header">
+      <!-- زر القائمة الجانبية يميناً -->
+      <button class="header-btn" id="btn-open-menu" aria-label="فتح القائمة الرئيسية" title="القائمة">
+        <svg class="svg-icon" viewBox="0 0 24 24">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- الشعار في المنتصف: سواعد + رمز (مبنى وترس ومصباح) + الشعار الفرعي بين خطين أصفرين -->
+      <div class="logo-container" role="banner" onclick="navigateTo('home')">
+        <div class="logo-brand">
+          <div class="logo-symbol" aria-hidden="true">
+            <!-- أيقونة سواعد المدمجة: مبنى (صرح أكاديمي) + ترس (هندسة وعمل) + مصباح (فكر ونور) -->
+            <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 100%; height: 100%;">
+              <!-- المبنى / الصرح -->
+              <path d="M4 27h24M6 27V12l6-4 6 4v15M10 16h2M10 20h2" stroke="currentColor"/>
+              <!-- الترس -->
+              <circle cx="23" cy="9" r="3" stroke="currentColor"/>
+              <path d="M23 4v2M23 12v2M18 9h2M26 9h2" stroke="currentColor"/>
+              <!-- قبس المصباح / الإشراق -->
+              <path d="M12 4l1 2M16 3v2M7 5l1 2" stroke="#F2B632" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <span class="logo-title">سَواعِـد</span>
+        </div>
+        <div class="motto-wrapper">
+          <span class="motto-line" aria-hidden="true"></span>
+          <span class="motto-text">معاً نصنع الأفضل .. داخل وخارج الملعب</span>
+          <span class="motto-line" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- أيقونة التنبيهات يساراً مع شارة برقم أصفر -->
+      <button class="header-btn" id="btn-open-notifications" aria-label="الإشعارات والتنبيهات" title="الإشعارات">
+        <svg class="svg-icon" viewBox="0 0 24 24">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="badge-count" id="notification-badge" aria-label="عدد الإشعارات">3</span>
+      </button>
+    </header>
+
+    <!-- محتوى الشاشات المتنقلة -->
+    <main id="main-content" style="flex: 1;">
+
+      <!-- ==========================================
+           الشاشة الرئيسية (Home View)
+           ========================================== -->
+      <div class="view-container active-view" id="view-home">
+        
+        <!-- 2. بانر كحلي كبير بسلايدر تلقائي بثلاث نقاط -->
+        <section class="banner-section">
+          <div class="hero-banner">
+            <div class="slider-track-container">
+              <div class="slider-track" id="hero-slider-track">
+                <!-- الشريحة 1 -->
+                <div class="slider-slide">
+                  <div class="banner-content">
+                    <span class="banner-badge">الدورة الرياضية لدفعة سواعد</span>
+                    <h2 class="banner-title">
+                      <span class="highlight-yellow">سواعد.. </span>
+                      <span class="text-white-strong">أكثر من مجرد دفعة</span>
+                    </h2>
+                    <p class="banner-desc">تنافس شريف، روح أخوية، وإثارة تتجدد في كافة الميادين والألعاب.</p>
+                  </div>
+                </div>
+                <!-- الشريحة 2 -->
+                <div class="slider-slide">
+                  <div class="banner-content">
+                    <span class="banner-badge">تحديثات فورية</span>
+                    <h2 class="banner-title">
+                      <span class="highlight-yellow">جداول تفاعلية.. </span>
+                      <span class="text-white-strong">ونتائج مباشرة</span>
+                    </h2>
+                    <p class="banner-desc">متابعة دقيقة للأدوار الإقصائية ومجموعات البطولة وتأهل الفرق أولاً بأول.</p>
+                  </div>
+                </div>
+                <!-- الشريحة 3 -->
+                <div class="slider-slide">
+                  <div class="banner-content">
+                    <span class="banner-badge">داخل وخارج الملعب</span>
+                    <h2 class="banner-title">
+                      <span class="highlight-yellow">يداً بيد.. </span>
+                      <span class="text-white-strong">نحو منصات التتويج</span>
+                    </h2>
+                    <p class="banner-desc">أبطال في دراستهم، فرسان في رياضتهم.. بالتوفيق لجميع زملائنا.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- صف رسومات الألعاب الخمسة في البانر: كرة قدم، طائرة، شطرنج، بلياردو، بلايستيشن -->
+            <div class="banner-sports-icons" role="region" aria-label="الألعاب المعتمدة في البطولة">
+              <div class="banner-sport-item" onclick="openTournament('football')">
+                <div class="banner-sport-icon-box" title="كرة القدم">
+                  <svg class="svg-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polygon points="12 6 15 9 14 13 10 13 9 9 12 6"></polygon>
+                    <line x1="12" y1="6" x2="12" y2="2"></line>
+                    <line x1="15" y1="9" x2="18.5" y2="7"></line>
+                    <line x1="14" y1="13" x2="16.5" y2="17"></line>
+                    <line x1="10" y1="13" x2="7.5" y2="17"></line>
+                    <line x1="9" y1="9" x2="5.5" y2="7"></line>
+                  </svg>
+                </div>
+                <span>القدم</span>
+              </div>
+
+              <div class="banner-sport-item" onclick="openTournament('volleyball')">
+                <div class="banner-sport-icon-box" title="كرة الطائرة">
+                  <svg class="svg-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 2a10 10 0 0 0 0 20"></path>
+                    <path d="M2 12a10 10 0 0 1 10-10"></path>
+                    <path d="M12 22a10 10 0 0 1 7.07-2.93"></path>
+                    <path d="M4.93 4.93A10 10 0 0 0 12 12"></path>
+                  </svg>
+                </div>
+                <span>الطائرة</span>
+              </div>
+
+              <div class="banner-sport-item" onclick="openTournament('chess')">
+                <div class="banner-sport-icon-box" title="الشطرنج">
+                  <svg class="svg-icon" viewBox="0 0 24 24">
+                    <path d="M7 21h10M9 21v-3h6v3M9 18l1-5h4l1 5M12 4c2.5 0 3 2 3 4s-1.5 3-3 4-3-2-3-4 0.5-4 3-4z"></path>
+                    <path d="M12 4V2"></path>
+                  </svg>
+                </div>
+                <span>الشطرنج</span>
+              </div>
+
+              <div class="banner-sport-item" onclick="openTournament('billiards')">
+                <div class="banner-sport-icon-box" title="البلياردو">
+                  <svg class="svg-icon" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+                    <path d="M18 6l3-3M3 21l4-4"></path>
+                  </svg>
+                </div>
+                <span>البلياردو</span>
+              </div>
+
+              <div class="banner-sport-item" onclick="openTournament('playstation')">
+                <div class="banner-sport-icon-box" title="البلايستيشن">
+                  <svg class="svg-icon" viewBox="0 0 24 24">
+                    <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+                    <path d="M6 12h4M8 10v4M15 11h.01M17 13h.01"></path>
+                  </svg>
+                </div>
+                <span>بلايستيشن</span>
+              </div>
+            </div>
+
+            <!-- مؤشرات السلايدر (3 نقاط) -->
+            <div class="slider-dots" id="slider-dots-container" role="tablist" aria-label="مؤشر الشرائح">
+              <button class="slider-dot active" data-index="0" aria-label="الشريحة الأولى"></button>
+              <button class="slider-dot" data-index="1" aria-label="الشريحة الثانية"></button>
+              <button class="slider-dot" data-index="2" aria-label="الشريحة الثالثة"></button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. صف الأقسام الخمسة: كرة القدم، كرة الطائرة، الشطرنج، البلياردو، البلايستيشن -->
+        <section class="sports-row-section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="title-pill" aria-hidden="true"></span>
+              <h3 class="section-title">أقسام البطولات</h3>
+            </div>
+            <button class="header-btn" style="width: auto; height: 32px; font-size: 12px; font-weight: 700; color: var(--navy-dark);" onclick="navigateTo('tournaments')">
+              عرض الكل
+            </button>
+          </div>
+
+          <div class="sports-grid-5" role="list">
+            <!-- كرة القدم -->
+            <div class="sport-category-card" onclick="openTournament('football')" role="listitem" tabindex="0">
+              <div class="sport-cat-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polygon points="12 6 15 9 14 13 10 13 9 9 12 6"></polygon>
+                  <line x1="12" y1="6" x2="12" y2="2"></line>
+                  <line x1="15" y1="9" x2="18.5" y2="7"></line>
+                  <line x1="14" y1="13" x2="16.5" y2="17"></line>
+                  <line x1="10" y1="13" x2="7.5" y2="17"></line>
+                  <line x1="9" y1="9" x2="5.5" y2="7"></line>
+                </svg>
+              </div>
+              <span class="sport-cat-name">كرة القدم</span>
+            </div>
+
+            <!-- كرة الطائرة -->
+            <div class="sport-category-card" onclick="openTournament('volleyball')" role="listitem" tabindex="0">
+              <div class="sport-cat-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 2a10 10 0 0 0 0 20"></path>
+                  <path d="M2 12a10 10 0 0 1 10-10"></path>
+                  <path d="M12 22a10 10 0 0 1 7.07-2.93"></path>
+                </svg>
+              </div>
+              <span class="sport-cat-name">كرة الطائرة</span>
+            </div>
+
+            <!-- الشطرنج -->
+            <div class="sport-category-card" onclick="openTournament('chess')" role="listitem" tabindex="0">
+              <div class="sport-cat-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                  <path d="M7 21h10M9 21v-3h6v3M9 18l1-5h4l1 5M12 4c2.5 0 3 2 3 4s-1.5 3-3 4-3-2-3-4 0.5-4 3-4z"></path>
+                  <path d="M12 4V2"></path>
+                </svg>
+              </div>
+              <span class="sport-cat-name">الشطرنج</span>
+            </div>
+
+            <!-- البلياردو -->
+            <div class="sport-category-card" onclick="openTournament('billiards')" role="listitem" tabindex="0">
+              <div class="sport-cat-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <circle cx="12" cy="12" r="4" fill="currentColor"></circle>
+                  <path d="M18 6l3-3M3 21l4-4"></path>
+                </svg>
+              </div>
+              <span class="sport-cat-name">البلياردو</span>
+            </div>
+
+            <!-- البلايستيشن -->
+            <div class="sport-category-card" onclick="openTournament('playstation')" role="listitem" tabindex="0">
+              <div class="sport-cat-icon">
+                <svg class="svg-icon" viewBox="0 0 24 24">
+                  <rect x="2" y="6" width="20" height="12" rx="6"></rect>
+                  <path d="M6 12h4M8 10v4M15 11h.01M17 13h.01"></path>
+                </svg>
+              </div>
+              <span class="sport-cat-name">بلايستيشن</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. بطاقتان جنباً إلى جنب: "المباراة القادمة" و "ترتيب الدفعة" -->
+        <section class="side-cards-section">
+          <div class="two-col-grid">
+            
+            <!-- بطاقة المباراة القادمة (كحلية بمثلث أصفر صغير في الزاوية) -->
+            <div class="match-card-navy card-with-corner-triangle" id="upcoming-match-card">
+              <div class="card-top-tag">
+                <span class="card-tag-badge">
+                  <svg class="svg-icon" style="width: 13px; height: 13px;" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  المباراة القادمة
+                </span>
+                <span class="match-sport-name" id="upcoming-sport-name">كرة القدم - الجولة 1</span>
+              </div>
+
+              <!-- طرفا المباراة مع VS -->
+              <div class="match-opponents-row">
+                <div class="opponent-box">
+                  <div class="opponent-avatar" id="upcoming-team1-avatar">ف1</div>
+                  <span class="opponent-name" id="upcoming-team1-name">الفريق الأول</span>
+                </div>
+
+                <div class="match-vs-circle" aria-label="ضد">VS</div>
+
+                <div class="opponent-box">
+                  <div class="opponent-avatar" id="upcoming-team2-avatar">ف2</div>
+                  <span class="opponent-name" id="upcoming-team2-name">الفريق الثاني</span>
+                </div>
+              </div>
+
+              <!-- التاريخ والساعة والمكان -->
+              <div class="match-meta-info">
+                <div class="meta-item">
+                  <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--yellow-gold);" viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                  </svg>
+                  <span id="upcoming-match-date">غداً، الخميس</span>
+                </div>
+                <div class="meta-item">
+                  <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--yellow-gold);" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                  <span id="upcoming-match-time">04:30 مساءً</span>
+                </div>
+                <div class="meta-item">
+                  <svg class="svg-icon" style="width: 14px; height: 14px; color: var(--yellow-gold);" viewBox="0 0 24 24">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                  <span id="upcoming-match-venue">ملعب الكلية</span>
+                </div>
+              </div>
+
+              <!-- زر أصفر "تفاصيل المباراة" -->
+              <button class="btn-yellow" id="btn-upcoming-details">
+                <svg class="svg-icon" viewBox="0 0 24 24" style="stroke: var(--navy-dark);">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="16" x2="12" y2="12"></line>
+                  <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                </svg>
+                تفاصيل المباراة
+              </button>
+            </div>
+
+            <!-- بطاقة "ترتيب الدفعة": أفضل 5، والأول بخلفية صفراء -->
+            <div class="standings-card card-with-corner-triangle">
+              <div class="standings-header-title">
+                <div class="section-title-wrap">
+                  <span class="title-pill" aria-hidden="true"></span>
+                  <h4 class="card-heading">ترتيب الدفعة العام</h4>
+                </div>
+                <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">الدرع الرياضي</span>
+              </div>
+
+              <div class="standings-list" id="batch-top5-list">
+                <!-- يُملأ ديناميكياً بواسطة JavaScript -->
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 5. "آخر الأحداث": بطاقات أفقية بصورة وعنوان ووصف قصير وتاريخ -->
+        <section class="events-section">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="title-pill" aria-hidden="true"></span>
+              <h3 class="section-title">آخر الأحداث والأخبار</h3>
+            </div>
+            <span style="font-size: 11px; color: var(--text-muted); font-weight: 600;">تحديثات دورية</span>
+          </div>
+
+          <div class="events-scroll-container" id="events-list-container">
+            <!-- يُملأ ديناميكياً عبر JavaScript -->
+          </div>
+        </section>
+
+      </div>
+
+      <!-- ==========================================
+           شاشة قائمة الرياضات (Sports View)
+           ========================================== -->
+      <div class="view-container" id="view-sports">
+        <div style="padding: 16px;">
+          <div class="section-title-wrap" style="margin-bottom: 14px;">
+            <span class="title-pill"></span>
+            <h3 class="section-title">الألعاب والمسابقات المتاحة</h3>
+          </div>
+          <div id="sports-all-list" style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- يتم تعبئة بطاقات الألعاب بواسطة app.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           شاشة جدول المباريات الموحد (Matches View)
+           ========================================== -->
+      <div class="view-container" id="view-matches">
+        <div style="padding: 16px;">
+          <div class="section-header">
+            <div class="section-title-wrap">
+              <span class="title-pill"></span>
+              <h3 class="section-title">جدول المباريات والنتائج</h3>
+            </div>
+          </div>
+
+          <!-- فلاتر الرياضة -->
+          <div style="display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px;" id="matches-filter-pills">
+            <!-- أزرار الفلترة تضاف بالجافاسكربت -->
+          </div>
+
+          <!-- قائمة المباريات -->
+          <div id="unified-matches-list">
+            <!-- مباريات يتم عرضها هنا -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           شاشة قائمة البطولات (Tournaments View)
+           ========================================== -->
+      <div class="view-container" id="view-tournaments">
+        <div style="padding: 16px;">
+          <div class="section-title-wrap" style="margin-bottom: 14px;">
+            <span class="title-pill"></span>
+            <h3 class="section-title">بطولات دورة سواعد</h3>
+          </div>
+          <div id="tournaments-cards-grid" style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- بطاقات البطولات الخمس مع صيغة كل بطولة -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           شاشة تفاصيل بطولة محددة (Tournament Detail View)
+           ========================================== -->
+      <div class="view-container" id="view-tournament-detail">
+        <div class="subpage-header">
+          <button class="back-btn" id="btn-back-from-tournament" aria-label="رجوع">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <div class="subpage-title-box">
+            <span class="subpage-title" id="tour-detail-title">بطولة كرة القدم</span>
+            <span class="tournament-type-pill" id="tour-detail-pill">7 فرق</span>
+          </div>
+          <div style="width: 44px;"></div>
+        </div>
+
+        <!-- تبويبات البطولة الثلاثة المطلوبة: الجدول/المجموعات | المباريات | النتائج -->
+        <div class="tournament-subtabs" role="tablist">
+          <button class="tour-subtab-btn active" id="subtab-bracket" onclick="switchTourSubtab('bracket')">
+            <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            <span id="subtab-bracket-text">الجدول والمجموعات</span>
+          </button>
+
+          <button class="tour-subtab-btn" id="subtab-matches" onclick="switchTourSubtab('matches')">
+            <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+            </svg>
+            <span>المباريات</span>
+          </button>
+
+          <button class="tour-subtab-btn" id="subtab-results" onclick="switchTourSubtab('results')">
+            <svg class="svg-icon" style="width: 16px; height: 16px;" viewBox="0 0 24 24">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span>النتائج والترتيب</span>
+          </button>
+        </div>
+
+        <!-- محتويات التبويبات الفرعية -->
+        <div style="padding: 14px;">
+          <!-- تبويب 1: الجدول أو الشجرة أو المجموعات -->
+          <div id="tour-tabcontent-bracket" class="tour-tab-pane">
+            <div id="tour-bracket-renderer"></div>
+          </div>
+
+          <!-- تبويب 2: قائمة مباريات البطولة -->
+          <div id="tour-tabcontent-matches" class="tour-tab-pane" style="display: none;">
+            <div id="tour-matches-renderer"></div>
+          </div>
+
+          <!-- تبويب 3: النتائج ولوحة الشرف والترتيب -->
+          <div id="tour-tabcontent-results" class="tour-tab-pane" style="display: none;">
+            <div id="tour-results-renderer"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ==========================================
+           شاشة الإعدادات ولوحة الإدارة (Settings View)
+           ========================================== -->
+      <div class="view-container" id="view-settings">
+        <div style="padding: 16px;">
+          <div class="section-title-wrap" style="margin-bottom: 14px;">
+            <span class="title-pill"></span>
+            <h3 class="section-title">إعدادات التطبيق والإدارة</h3>
+          </div>
+
+          <!-- بطاقة وضع المدير (Admin Mode) -->
+          <div class="settings-section-card">
+            <h4 class="settings-card-title">
+              <svg class="svg-icon" style="color: var(--yellow-gold);" viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+              صلاحية مدير النظام لإدخال النتائج
+            </h4>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+              يسمح رمز الدخول لمدير التطبيق بتسجيل نتائج المباريات وتحديث أدوار وجداول البطولة فوراً.
+            </p>
+            <div id="admin-status-box" style="margin-bottom: 10px;">
+              <!-- حالة الدخول الحالية -->
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <input type="password" id="input-admin-pin" class="form-input" placeholder="رمز دخول المدير (الافتراضي: 1234)" maxlength="8" />
+              <button class="btn-sm-action primary" id="btn-submit-pin" style="min-width: 90px; justify-content: center;">
+                تأكيد
+              </button>
+            </div>
+          </div>
+
+          <!-- بطاقة إعادة ضبط البيانات -->
+          <div class="settings-section-card">
+            <h4 class="settings-card-title">
+              <svg class="svg-icon" style="color: var(--danger);" viewBox="0 0 24 24">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+              إعادة تعيين البيانات الافتراضية
+            </h4>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+              استعادة أسماء اللاعبين والفرق والمباريات الأولية من نموذج البيانات الأساسي ومسح التعديلات المخزنة محلياً.
+            </p>
+            <button class="btn-sm-action" id="btn-reset-data" style="color: var(--danger); border-color: #FECACA; background-color: #FEF2F2;">
+              استعادة ضبط المصنع
+            </button>
+          </div>
+
+          <!-- بطاقة معلومات دفعة سواعد -->
+          <div class="settings-section-card">
+            <h4 class="settings-card-title">
+              <svg class="svg-icon" style="color: var(--navy-dark);" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              عن مبادرة سواعد
+            </h4>
+            <p style="font-size: 12px; color: var(--text-dark); line-height: 1.6;">
+              <strong>شعارنا:</strong> "معاً نصنع الأفضل .. داخل وخارج الملعب"<br>
+              تطبيق رياضي خاص بتنظيم الأنشطة والبطولات الرياضية والإلكترونية، ويهدف إلى تعزيز أواصر التلاحم والنشاط الرياضي بروح التنافس الشريف.
+            </p>
+            <div style="margin-top: 10px; font-size: 11px; color: var(--text-muted);">
+              نسخة الويب السحابية v1.0 • حفظ محلي آمن في المتصفح (localStorage)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <!-- 6. شريط التنقل السفلي الكحلي بحواف علوية دائرية (Bottom Navigation) -->
+    <!-- التبويبات الخمسة: الرئيسية، الرياضة، المباريات، البطولات، الإعدادات -->
+    <nav class="bottom-nav" aria-label="شريط التنقل الرئيسي">
+      <div class="nav-items-wrapper">
+        <!-- 1. الرئيسية -->
+        <button class="nav-tab-btn active" data-view="home" aria-label="الصفحة الرئيسية">
+          <svg class="svg-icon" viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>الرئيسية</span>
+        </button>
+
+        <!-- 2. الرياضة -->
+        <button class="nav-tab-btn" data-view="sports" aria-label="أقسام الرياضة">
+          <svg class="svg-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+            <path d="M14.07 16.93a6 6 0 0 1-8.14-8.14"></path>
+            <path d="M9.93 7.07a6 6 0 0 1 8.14 8.14"></path>
+          </svg>
+          <span>الرياضة</span>
+        </button>
+
+        <!-- 3. المباريات -->
+        <button class="nav-tab-btn" data-view="matches" aria-label="جدول المباريات">
+          <svg class="svg-icon" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>المباريات</span>
+        </button>
+
+        <!-- 4. البطولات (بدل حسابي كما طُلب بدقة) -->
+        <button class="nav-tab-btn" data-view="tournaments" aria-label="جداول البطولات">
+          <svg class="svg-icon" viewBox="0 0 24 24">
+            <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+            <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+            <path d="M4 22h16"></path>
+            <path d="M10 14.66V17c0 .55-.45 1-1 1H7"></path>
+            <path d="M14 14.66V17c0 .55.45 1 1 1h2"></path>
+            <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+          </svg>
+          <span>البطولات</span>
+        </button>
+
+        <!-- 5. الإعدادات -->
+        <button class="nav-tab-btn" data-view="settings" aria-label="إعدادات التطبيق">
+          <svg class="svg-icon" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span>الإعدادات</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- نافذة منبثقة لتفاصيل المباراة -->
+    <div class="modal-overlay" id="modal-match-details">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title" id="modal-match-title">تفاصيل المباراة</span>
+          <button class="modal-close-btn" onclick="closeModal('modal-match-details')" aria-label="إغلاق">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body" id="modal-match-body">
+          <!-- تفاصيل يملؤها الجافاسكربت -->
+        </div>
+      </div>
+    </div>
+
+    <!-- نافذة طلب رمز دخول المدير (بدون prompt المتصفح) -->
+    <div class="modal-overlay" id="modal-admin-pin">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">تسجيل دخول مدير البطولة</span>
+          <button class="modal-close-btn" onclick="closeModal('modal-admin-pin')" aria-label="إغلاق">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p style="font-size: 12.5px; color: var(--text-dark); line-height: 1.5;">
+            لتسجيل أو تعديل نتائج المباريات، يُرجى إدخال رمز دخول المدير (الرمز الافتراضي: <strong>1234</strong>):
+          </p>
+          <div class="form-group">
+            <input type="password" id="modal-pin-field" class="form-input" style="text-align: center; font-size: 20px; letter-spacing: 4px;" placeholder="••••" maxlength="8" />
+          </div>
+          <div id="modal-pin-error" style="display: none; color: var(--danger); font-size: 11.5px; font-weight: 700; text-align: center;">
+            رمز الدخول غير صحيح، يرجى المحاولة ثانية.
+          </div>
+          <button class="btn-yellow" id="btn-confirm-modal-pin">
+            تأكيد الدخول
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- نافذة منبثقة لإدخال نتيجة المباراة (خاصة بالمدير) -->
+    <div class="modal-overlay" id="modal-enter-score">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">تسجيل نتيجة المباراة</span>
+          <button class="modal-close-btn" onclick="closeModal('modal-enter-score')" aria-label="إغلاق">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="score-match-id" />
+          <div style="text-align: center; font-size: 13px; color: var(--text-muted);" id="score-match-subhead">
+            قم بإدخال الأهداف أو الأشواط
+          </div>
+
+          <div class="score-inputs-row">
+            <div class="score-input-box">
+              <label id="score-label-team1">الفريق الأول</label>
+              <input type="number" id="input-score-team1" class="score-number-field" min="0" max="99" value="0" />
+            </div>
+            <div style="font-size: 20px; font-weight: 800; color: var(--navy-dark); padding-top: 20px;">
+              :
+            </div>
+            <div class="score-input-box">
+              <label id="score-label-team2">الفريق الثاني</label>
+              <input type="number" id="input-score-team2" class="score-number-field" min="0" max="99" value="0" />
+            </div>
+          </div>
+
+          <!-- تنبيه خاص بكرة الطائرة أو مباريات خروج المغلوب لمنع التعادل -->
+          <div id="tie-warning" style="display: none; font-size: 11.5px; color: var(--danger); text-align: center; font-weight: 700;">
+            مباريات خروج المغلوب والطائرة تتطلب فائزاً بدون تعادل.
+          </div>
+
+          <button class="btn-yellow" id="btn-save-score" style="margin-top: 8px;">
+            حفظ النتيجة وتحديث الأدوار
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- نافذة الإشعارات المنبثقة -->
+    <div class="modal-overlay" id="modal-notifications">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">تنبيهات وإعلانات الدورة</span>
+          <button class="modal-close-btn" onclick="closeModal('modal-notifications')" aria-label="إغلاق">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="modal-body" id="notifications-list-container" style="max-height: 400px; overflow-y: auto;">
+          <!-- تنبيهات يولدها الجافاسكربت -->
+        </div>
+      </div>
+    </div>
+
+    <!-- القائمة الجانبية (Drawer Sidebar) -->
+    <div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+    <div class="drawer-panel" id="drawer-panel">
+      <div class="drawer-header">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div class="logo-brand">
+            <span class="logo-title" style="color: var(--white); font-size: 20px;">سَواعِـد</span>
+          </div>
+          <button class="header-btn" style="color: var(--white);" onclick="closeDrawer()" aria-label="إغلاق القائمة">
+            <svg class="svg-icon" viewBox="0 0 24 24">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <span style="font-size: 11px; color: var(--yellow-gold); font-weight: 700;">معاً نصنع الأفضل .. داخل وخارج الملعب</span>
+      </div>
+
+      <div class="drawer-menu-list">
+        <button class="drawer-link" onclick="navigateTo('home'); closeDrawer();">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          <span>الرئيسية</span>
+        </button>
+        <button class="drawer-link" onclick="navigateTo('sports'); closeDrawer();">
+          <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+          <span>الألعاب والرياضات</span>
+        </button>
+        <button class="drawer-link" onclick="navigateTo('matches'); closeDrawer();">
+          <svg class="svg-icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line></svg>
+          <span>جدول المباريات</span>
+        </button>
+        <button class="drawer-link" onclick="navigateTo('tournaments'); closeDrawer();">
+          <svg class="svg-icon" viewBox="0 0 24 24"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path></svg>
+          <span>شجرة البطولات والمجموعات</span>
+        </button>
+        <button class="drawer-link" onclick="navigateTo('settings'); closeDrawer();">
+          <svg class="svg-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          <span>الإعدادات والإدارة</span>
+        </button>
+      </div>
+
+      <div style="padding: 16px; border-top: 1px solid var(--border-color); font-size: 11px; text-align: center; color: var(--text-muted);">
+        سواعد • دورة الألعاب الرياضية للموبايل
+      </div>
+    </div>
+
+    <!-- إشعار عائم (Toast) -->
+    <div class="toast-notice" id="app-toast"></div>
+
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

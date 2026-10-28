@@ -1,0 +1,1561 @@
+/* ==========================================================================
+   سواعد (Sawa'id) - الأنماط والتصميم البصري للهوية الرياضية
+   الهوية: خلفية فاتحة #F6F4EF | كحلي #0F2A55 | أصفر ذهبي #F2B632
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap');
+
+:root {
+  --bg-main: #F6F4EF;
+  --navy-dark: #0F2A55;
+  --navy-card: #15386E;
+  --navy-surface: #1E4684;
+  --yellow-gold: #F2B632;
+  --yellow-hover: #DCA022;
+  --yellow-light: #FFF8E7;
+  --text-primary: #0F2A55;
+  --text-dark: #1E293B;
+  --text-muted: #64748B;
+  --text-light: #F8FAFC;
+  --white: #FFFFFF;
+  --border-color: #E2DFD8;
+  --border-light: #EFECE6;
+  --card-shadow: 0 4px 18px rgba(15, 42, 85, 0.08);
+  --modal-overlay: rgba(15, 42, 85, 0.65);
+  --success: #16A34A;
+  --danger: #DC2626;
+  --font-family: 'Cairo', 'Tajawal', sans-serif;
+  --touch-target: 44px;
+}
+
+/* إعادة التعيين العام وضبط الاتجاه */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  direction: rtl;
+  text-align: right;
+  font-family: var(--font-family);
+  background-color: #ECE9E2;
+  color: var(--text-dark);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* خلفية الزوايا بالخطوط القُطرية الكحلية والصفراء */
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.16;
+}
+
+/* خطوط زاوية أعلى اليمين */
+body::before {
+  top: 0;
+  right: 0;
+  width: 220px;
+  height: 220px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--navy-dark),
+    var(--navy-dark) 10px,
+    transparent 10px,
+    transparent 20px,
+    var(--yellow-gold) 20px,
+    var(--yellow-gold) 30px,
+    transparent 30px,
+    transparent 40px
+  );
+}
+
+/* خطوط زاوية أسفل اليسار */
+body::after {
+  bottom: 0;
+  left: 0;
+  width: 220px;
+  height: 220px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--navy-dark),
+    var(--navy-dark) 10px,
+    transparent 10px,
+    transparent 20px,
+    var(--yellow-gold) 20px,
+    var(--yellow-gold) 30px,
+    transparent 30px,
+    transparent 40px
+  );
+}
+
+/* إطار التطبيق للموبايل (390px - 440px) */
+.app-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: var(--bg-main);
+  box-shadow: 0 0 40px rgba(15, 42, 85, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 84px; /* مسافة للشريط السفلي */
+}
+
+/* الأيقونات SVG الأساسية */
+.svg-icon {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  stroke-width: 2;
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   1. الهيدر (Header)
+   ========================================================================== */
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--bg-main);
+  border-bottom: 1px solid var(--border-color);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  backdrop-filter: blur(10px);
+}
+
+.header-btn {
+  width: var(--touch-target);
+  height: var(--touch-target);
+  min-width: var(--touch-target);
+  min-height: var(--touch-target);
+  border: none;
+  background: transparent;
+  color: var(--navy-dark);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.header-btn:active {
+  background-color: rgba(15, 42, 85, 0.08);
+  transform: scale(0.95);
+}
+
+/* شارة الإشعارات الصفراء */
+.badge-count {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background-color: var(--yellow-gold);
+  color: var(--navy-dark);
+  font-weight: 800;
+  font-size: 11px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-main);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* شعار سواعد والشعار الفرعي بالمنتصف */
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  user-select: none;
+}
+
+.logo-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-symbol {
+  width: 32px;
+  height: 32px;
+  color: var(--yellow-gold);
+  background-color: var(--navy-dark);
+  padding: 5px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-title {
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--navy-dark);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.motto-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.motto-line {
+  display: inline-block;
+  width: 14px;
+  height: 2px;
+  background-color: var(--yellow-gold);
+  border-radius: 1px;
+}
+
+.motto-text {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--navy-dark);
+  opacity: 0.9;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   2. البانر الكحلي والسلايدر (Banner & Slider)
+   ========================================================================== */
+.banner-section {
+  padding: 14px 16px 8px;
+}
+
+.hero-banner {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, #153569 100%);
+  border-radius: 20px;
+  padding: 20px 18px 16px;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+/* زاوية زخرفية في البانر */
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242, 182, 50, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.slider-track-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-track {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+}
+
+.slider-slide {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.banner-badge {
+  align-self: flex-start;
+  background: rgba(242, 182, 50, 0.18);
+  color: var(--yellow-gold);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  border: 1px solid rgba(242, 182, 50, 0.3);
+}
+
+.banner-title {
+  font-size: 21px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.banner-title .highlight-yellow {
+  color: var(--yellow-gold);
+}
+
+.banner-title .text-white-strong {
+  color: var(--white);
+}
+
+.banner-desc {
+  font-size: 12px;
+  color: #CBD5E1;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+/* رسومات الألعاب الخمسة في البانر */
+.banner-sports-icons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 10px 8px;
+  margin-top: 4px;
+}
+
+.banner-sport-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #E2E8F0;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.banner-sport-icon-box {
+  width: 38px;
+  height: 38px;
+  background: rgba(242, 182, 50, 0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow-gold);
+  border: 1px solid rgba(242, 182, 50, 0.25);
+  transition: transform 0.2s;
+}
+
+.banner-sport-item:hover .banner-sport-icon-box {
+  transform: translateY(-2px);
+  background: var(--yellow-gold);
+  color: var(--navy-dark);
+}
+
+/* مؤشرات السلايدر (الثلاث نقاط) */
+.slider-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.slider-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: all 0.25s;
+}
+
+.slider-dot.active {
+  width: 24px;
+  border-radius: 10px;
+  background-color: var(--yellow-gold);
+}
+
+/* ==========================================================================
+   3. صف الأقسام الخمسة (Sports Categories)
+   ========================================================================== */
+.sports-row-section {
+  padding: 12px 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.title-pill {
+  width: 4px;
+  height: 18px;
+  background-color: var(--yellow-gold);
+  border-radius: 2px;
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy-dark);
+}
+
+.sports-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+.sport-category-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 12px 4px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 42, 85, 0.04);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: var(--touch-target);
+  position: relative;
+  overflow: hidden;
+}
+
+.sport-category-card:hover,
+.sport-category-card:active {
+  transform: translateY(-3px);
+  border-color: var(--yellow-gold);
+  box-shadow: 0 6px 14px rgba(242, 182, 50, 0.18);
+}
+
+.sport-cat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: #F1F4F9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy-dark);
+  transition: all 0.2s;
+}
+
+.sport-category-card:hover .sport-cat-icon {
+  background-color: var(--navy-dark);
+  color: var(--yellow-gold);
+}
+
+.sport-cat-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy-dark);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   4. بطاقتان جنباً إلى جنب (Match & Standings)
+   ========================================================================== */
+.side-cards-section {
+  padding: 8px 16px 14px;
+}
+
+.two-col-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 380px) {
+  .two-col-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* بطاقة بزاوية مثلث أصفر */
+.card-with-corner-triangle {
+  position: relative;
+}
+
+.card-with-corner-triangle::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 22px 22px 0 0;
+  border-color: var(--yellow-gold) transparent transparent transparent;
+  border-top-left-radius: 16px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* بطاقة المباراة القادمة (كحلية) */
+.match-card-navy {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, #15386E 100%);
+  color: var(--white);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-top-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-tag-badge {
+  background: rgba(242, 182, 50, 0.2);
+  color: var(--yellow-gold);
+  border: 1px solid rgba(242, 182, 50, 0.4);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.match-sport-name {
+  font-size: 11.5px;
+  color: #CBD5E1;
+  font-weight: 600;
+}
+
+.match-opponents-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  gap: 8px;
+}
+
+.opponent-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.opponent-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1.5px solid rgba(242, 182, 50, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow-gold);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.opponent-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.match-vs-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--yellow-gold);
+  color: var(--navy-dark);
+  font-weight: 900;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.match-meta-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-size: 11px;
+  color: #E2E8F0;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-yellow {
+  width: 100%;
+  min-height: var(--touch-target);
+  background-color: var(--yellow-gold);
+  color: var(--navy-dark);
+  border: none;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 800;
+  font-family: var(--font-family);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background-color 0.2s, transform 0.15s;
+}
+
+.btn-yellow:hover {
+  background-color: var(--yellow-hover);
+}
+
+.btn-yellow:active {
+  transform: scale(0.98);
+}
+
+/* بطاقة ترتيب الدفعة */
+.standings-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.standings-header-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-heading {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--navy-dark);
+}
+
+.standings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.standing-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background-color: #F8F9FA;
+  border: 1px solid var(--border-light);
+  transition: transform 0.15s;
+}
+
+/* المركز الأول بخلفية صفراء بارزة */
+.standing-row.top-rank-gold {
+  background: linear-gradient(135deg, #FDF4D4 0%, #FEEBB2 100%);
+  border: 1.5px solid var(--yellow-gold);
+}
+
+.rank-left-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rank-number-badge {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--navy-dark);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-rank-gold .rank-number-badge {
+  background: var(--yellow-gold);
+  color: var(--navy-dark);
+}
+
+.rank-participant-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy-dark);
+}
+
+.rank-points-tag {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--navy-dark);
+  background: rgba(15, 42, 85, 0.08);
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+.top-rank-gold .rank-points-tag {
+  background: rgba(15, 42, 85, 0.15);
+}
+
+/* ==========================================================================
+   5. آخر الأحداث (Latest Events / News)
+   ========================================================================== */
+.events-section {
+  padding: 10px 16px 20px;
+}
+
+.events-scroll-container {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-color) transparent;
+}
+
+.events-scroll-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.events-scroll-container::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 4px;
+}
+
+.event-card {
+  min-width: 240px;
+  max-width: 250px;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(15, 42, 85, 0.05);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.event-card-img-wrap {
+  width: 100%;
+  height: 105px;
+  background: linear-gradient(135deg, var(--navy-dark) 0%, #1E4684 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--yellow-gold);
+  position: relative;
+}
+
+.event-sport-tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(15, 42, 85, 0.85);
+  color: var(--yellow-gold);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.event-card-body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.event-card-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--navy-dark);
+  line-height: 1.3;
+}
+
+.event-card-desc {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.event-card-date {
+  font-size: 10.5px;
+  color: #94A3B8;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   6. شريط التنقل السفلي الكحلي (Bottom Navigation)
+   ========================================================================== */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--navy-dark);
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  box-shadow: 0 -4px 20px rgba(15, 42, 85, 0.25);
+  z-index: 100;
+  padding: 8px 12px 10px;
+}
+
+.nav-items-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav-tab-btn {
+  background: transparent;
+  border: none;
+  color: #94A3B8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  min-height: var(--touch-target);
+  min-width: 54px;
+  padding: 4px 6px;
+  position: relative;
+  font-family: var(--font-family);
+  font-size: 11px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.nav-tab-btn.active {
+  color: var(--yellow-gold);
+  font-weight: 800;
+}
+
+/* خط أصفر تحت العنصر النشط */
+.nav-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 24px;
+  height: 3px;
+  background-color: var(--yellow-gold);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(242, 182, 50, 0.6);
+}
+
+.nav-tab-btn .svg-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.15s;
+}
+
+.nav-tab-btn.active .svg-icon {
+  transform: translateY(-2px);
+  stroke: var(--yellow-gold);
+}
+
+/* ==========================================================================
+   صفحات الأقسام الأخرى والتبويبات الداخلية
+   ========================================================================== */
+.view-container {
+  display: none;
+  flex-direction: column;
+  width: 100%;
+}
+
+.view-container.active-view {
+  display: flex;
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* رأس صفحة البطولة الفرعية */
+.subpage-header {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, #15386E 100%);
+  color: var(--white);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--yellow-gold);
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  color: var(--white);
+  width: var(--touch-target);
+  height: var(--touch-target);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.subpage-title-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subpage-title {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.tournament-type-pill {
+  font-size: 10.5px;
+  background-color: var(--yellow-gold);
+  color: var(--navy-dark);
+  font-weight: 800;
+  padding: 2px 8px;
+  border-radius: 8px;
+}
+
+/* تبويبات صفحة البطولة */
+.tournament-subtabs {
+  display: flex;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--border-color);
+  padding: 6px 12px;
+  gap: 8px;
+  position: sticky;
+  top: 59px;
+  z-index: 40;
+}
+
+.tour-subtab-btn {
+  flex: 1;
+  min-height: var(--touch-target);
+  border: 1px solid transparent;
+  background: transparent;
+  border-radius: 12px;
+  font-family: var(--font-family);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.tour-subtab-btn.active {
+  background-color: var(--navy-dark);
+  color: var(--yellow-gold);
+  border-color: var(--navy-dark);
+}
+
+/* ==========================================================================
+   نظام الشجرة الإقصائية (Knockout Bracket) - قابلة للتمرير أفقياً
+   ========================================================================== */
+.bracket-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  padding: 16px 12px 24px;
+  background-color: #EFECE6;
+  border-radius: 16px;
+  margin: 12px 0;
+  scrollbar-width: thin;
+}
+
+.bracket-container {
+  display: flex;
+  gap: 24px;
+  min-width: 780px;
+  padding: 8px 4px;
+}
+
+.bracket-round-column {
+  display: flex;
+  flex-direction: column;
+  width: 180px;
+  flex-shrink: 0;
+}
+
+.round-header-box {
+  background-color: var(--navy-dark);
+  color: var(--white);
+  text-align: center;
+  padding: 6px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--yellow-gold);
+}
+
+.round-matches-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  gap: 16px;
+}
+
+.bracket-match-box {
+  background-color: var(--white);
+  border: 1.5px solid var(--border-color);
+  border-radius: 12px;
+  padding: 6px 8px;
+  box-shadow: 0 2px 6px rgba(15, 42, 85, 0.06);
+  position: relative;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.bracket-match-box:hover {
+  border-color: var(--yellow-gold);
+}
+
+.match-participant-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 6px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--navy-dark);
+}
+
+.match-participant-line.winner {
+  background-color: #FFF9E6;
+  font-weight: 800;
+  color: #855303;
+}
+
+.match-participant-line:first-child {
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.bracket-score-badge {
+  background-color: #E2E8F0;
+  color: var(--navy-dark);
+  font-weight: 800;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.match-participant-line.winner .bracket-score-badge {
+  background-color: var(--yellow-gold);
+}
+
+.bracket-status-tag {
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  padding: 2px;
+  color: var(--text-muted);
+}
+
+.champion-card {
+  background: linear-gradient(135deg, var(--yellow-gold) 0%, #E5A31E 100%);
+  color: var(--navy-dark);
+  border-radius: 14px;
+  padding: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 16px 0;
+  box-shadow: 0 4px 15px rgba(242, 182, 50, 0.35);
+}
+
+/* ==========================================================================
+   جداول المجموعات (Group Tables)
+   ========================================================================== */
+.group-table-wrap {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15, 42, 85, 0.05);
+  margin-bottom: 16px;
+}
+
+.group-table-title {
+  background-color: var(--navy-dark);
+  color: var(--white);
+  padding: 10px 14px;
+  font-size: 13.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.group-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11.5px;
+  text-align: center;
+}
+
+.group-table th {
+  background-color: #F8FAFC;
+  color: var(--navy-dark);
+  font-weight: 700;
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.group-table td {
+  padding: 8px 4px;
+  border-bottom: 1px solid var(--border-light);
+  color: var(--text-dark);
+}
+
+.group-table tr:hover {
+  background-color: #FAF8F2;
+}
+
+.group-table .team-cell {
+  text-align: right;
+  padding-right: 10px;
+  font-weight: 700;
+  color: var(--navy-dark);
+  white-space: nowrap;
+}
+
+/* شارات التأهل للمتصدر والوصيف */
+.qualify-badge {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--yellow-gold);
+  margin-left: 4px;
+}
+
+.group-table .pts-cell {
+  font-weight: 800;
+  color: var(--navy-dark);
+  background-color: #FFFBEB;
+}
+
+/* ==========================================================================
+   قوائم المباريات وبطاقاتها
+   ========================================================================== */
+.match-list-item {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 12px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(15, 42, 85, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.match-item-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  border-bottom: 1px dashed var(--border-light);
+  padding-bottom: 6px;
+}
+
+.match-item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.match-item-team {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy-dark);
+}
+
+.match-item-team.team-two {
+  text-align: left;
+}
+
+.match-item-score-box {
+  background: var(--navy-dark);
+  color: var(--yellow-gold);
+  font-weight: 900;
+  font-size: 14px;
+  padding: 4px 14px;
+  border-radius: 8px;
+  letter-spacing: 2px;
+}
+
+.match-item-score-box.pending {
+  background: #E2E8F0;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: normal;
+}
+
+.match-item-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btn-sm-action {
+  min-height: 36px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-family: var(--font-family);
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  background: var(--white);
+  color: var(--navy-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-sm-action.primary {
+  background: var(--navy-dark);
+  color: var(--yellow-gold);
+  border-color: var(--navy-dark);
+}
+
+/* ==========================================================================
+   النوافذ المنبثقة (Modals & Drawers)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--modal-overlay);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: var(--white);
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+  background-color: var(--navy-dark);
+  color: var(--white);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--yellow-gold);
+}
+
+.modal-title {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: #CBD5E1;
+  width: var(--touch-target);
+  height: var(--touch-target);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* حقول الإدخال */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy-dark);
+}
+
+.form-input {
+  width: 100%;
+  min-height: var(--touch-target);
+  border: 1.5px solid var(--border-color);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-family: var(--font-family);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: var(--navy-dark);
+}
+
+.score-inputs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.score-input-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.score-input-box label {
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.score-number-field {
+  width: 100%;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
+  color: var(--navy-dark);
+  min-height: 48px;
+  border: 2px solid var(--navy-dark);
+  border-radius: 12px;
+}
+
+/* القائمة الجانبية (Sidebar Drawer) */
+.drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--modal-overlay);
+  z-index: 150;
+  display: none;
+}
+
+.drawer-overlay.active {
+  display: block;
+}
+
+.drawer-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 290px;
+  max-width: 80%;
+  background-color: var(--bg-main);
+  z-index: 160;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 25px rgba(15, 42, 85, 0.2);
+}
+
+.drawer-panel.active {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  background-color: var(--navy-dark);
+  color: var(--white);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.drawer-menu-list {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--touch-target);
+  padding: 8px 12px;
+  border-radius: 10px;
+  color: var(--navy-dark);
+  font-weight: 700;
+  font-size: 13.5px;
+  text-decoration: none;
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.drawer-link:hover {
+  border-color: var(--yellow-gold);
+  background-color: #FFFDF9;
+}
+
+/* رسائل التنبيه العائمة (Toast) */
+.toast-notice {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background-color: var(--navy-dark);
+  color: var(--white);
+  border-right: 4px solid var(--yellow-gold);
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 12.5px;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  z-index: 250;
+  max-width: 90%;
+  text-align: center;
+}
+
+.toast-notice.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* بطاقات الإعدادات */
+.settings-section-card {
+  background: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(15, 42, 85, 0.04);
+}
+
+.settings-card-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--navy-dark);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* تصميم شاشات الموبايل القياسية */
+@media (max-width: 360px) {
+  .logo-title {
+    font-size: 19px;
+  }
+  .motto-text {
+    font-size: 8.5px;
+  }
+  .banner-title {
+    font-size: 18px;
+  }
+  .sports-grid-5 {
+    gap: 4px;
+  }
+  .sport-cat-name {
+    font-size: 9.5px;
+  }
+}
